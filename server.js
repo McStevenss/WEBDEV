@@ -5,9 +5,6 @@ const bodyParser = require('body-parser')
 const expressSession = require('express-session')
 const db = require('./my-database')
 const bcrypt = require('bcrypt')
-var validator = require('validator')
-const isInt = require('validator/lib/isInt')
-
 
 let hash = "$2b$10$cZ4fUT5bATfizDKq/xt8KuqbF1bRV2l6epI1icfrBRbyHh.miSxTO"
 
