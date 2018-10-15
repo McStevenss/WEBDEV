@@ -1,0 +1,28 @@
+<h1 class="title">Blog!</h1>
+ {{#if isLoggedIn}}
+  <p class="content">Logged in as Admin</p>
+  <p><a href="/add-post">Create new post</a></p> 
+  {{/if}}
+
+
+<ul>
+    {{#each blog}}
+        <li>
+        <div id="spacer-small"></div>
+            <div class="box BlogPostBox">
+                <p><strong>Måns Svensson</strong>
+                    <small>@Creator</small>
+                </p>
+                <div>{{post}}</div>
+
+                    {{#if ../isLoggedIn}}
+                        <a class ="link-lookalike-blue" href="/edit-post/{{id}}">Edit</a>    
+                    <form action="/deletePost" method="POST">
+                        <input type="hidden" name="id" value="{{id}}">
+                        <input class="link-lookalike" type="submit" value="Delete">
+                    </form>
+                    {{/if}}
+            </div>
+        </li>
+    {{/each}}
+</ul>

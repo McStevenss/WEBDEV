@@ -1,0 +1,107 @@
+main{
+    width: 80%;
+    margin-left: 15%;
+    padding-right: 15%;
+    display: inline-block;
+    vertical-align: top;
+}
+footer{
+    position: fixed;
+    bottom:0;
+    display: block;
+    width: 70%;
+    background-color: rgb(214, 214, 214);
+}
+textarea{
+    resize: none;
+}
+footer a{
+    color: gray;
+    text-align: right;
+}
+header img{
+    height: 160px;
+    width: 1000px;
+    margin: 0px;
+}
+nav{
+    width: 100%;
+    text-align: center;
+    vertical-align: top;
+    position: absolute;
+    border-bottom: 2px solid rgb(151, 151, 151);
+    box-shadow: 3px 3px 4px rgb(151, 151, 151);
+}
+nav ul{
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color:white;
+    vertical-align: top;
+    height: 64px;
+}
+nav ul li{
+    display:inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 2px;
+    border-color: white;
+    transition: border 0.2s linear;
+}
+
+nav ul li:hover{
+    border: solid 2px black;
+    border-radius: 2px;
+    transition: border 0.5s linear;
+
+}
+nav ul li img{
+    width: 130px;
+    height: 35px;
+}
+
+#spacer{
+    height: 85px;
+}
+#spacer-small{
+    height: 30px;
+}
+#NoBorder{
+    border: none !important;
+}
+.BlogPostBox{
+    display: inline-block;
+    width: 340px;
+    max-width: 340px;
+}
+.link-lookalike {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    padding: 0;
+}
+.link-lookalike-blue {
+    background: none;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+}
+#inputButton{
+    margin-top: 10px;
+}
+#loginField{
+    width: 350px;
+    max-width: 350px;
+    margin:5px;
+}
+#NameField{
+    width: 350px;
+    max-width: 350px;
+    margin-bottom:5px;
+}

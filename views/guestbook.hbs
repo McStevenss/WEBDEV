@@ -1,0 +1,27 @@
+<h1 class="title">Guestbook</h1>
+
+ {{#if isLoggedIn}}
+  <p class="content">Logged in as Admin</p>
+  {{/if}}
+
+<p>This is where you can <a href="/add-entry">post</a> a guestbook entry if you want!</p>
+
+
+<ul>
+    {{#each guestbook}}
+        <li>
+        <div id="spacer-small"></div>
+            <div class="box BlogPostBox">
+                <p><strong>{{name}}</strong></p>
+                <div>{{entry}}</div>
+
+            {{#if ../isLoggedIn}}
+            <form action="/deleteEntry" method="POST">
+                <input type="hidden" name="id" value="{{id}}">
+                <input class="link-lookalike" type="submit" value="Delete">
+            </form>
+            {{/if}}
+            </div>
+        </li>
+    {{/each}}
+</ul>

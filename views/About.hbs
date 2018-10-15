@@ -1,0 +1,42 @@
+
+    <h1 Class="title">About</h1>
+    <p class="content">This page is about me, Måns Svensson</p>
+
+
+    <p><Strong>Age:</Strong> 21
+    <br>
+       <Strong>Hobbies: </Strong> Gaming
+    <br>
+       <Strong>Favourite Meme:</Strong> Pepe the frog
+    </p>
+
+    <div id="spacer"></div>
+    <div>
+        <h class="title is-3">FAQs</h>
+
+        <p class="content">Want to ask a question? do that <a href="/add-faq">here</a></p>
+        {{#if isLoggedIn}} <p class="content">Logged in as Admin</p> {{/if}}
+        <ul>
+            {{#each faqs}}
+            <li>
+                <div id="spacer-small"></div>
+                <div class="box">
+                    <div>Question: {{question}}</div>
+                    <div>Answer: {{answer}}</div>
+                    {{#if ../isLoggedIn}}
+                        <a href="/answer-question/{{id}}">Answer</a>
+                    <form action="/deleteFaq" method="POST">
+                        <input type="hidden" name="id" value="{{id}}">
+                        <input class="link-lookalike" type="submit" value="Delete">
+                    </form>
+                    {{/if}}
+
+                </div>
+            </li>    
+            {{/each}}
+        </ul>
+        <div id="spacer-small"></div>
+    </div>
+
+
+        

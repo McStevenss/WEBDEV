@@ -1,0 +1,9 @@
+<h1 class="title">Edit a blogpost</h1>
+<p> Post number: {{blog.id}}</p>
+
+<form action="/edit-post/{{blog.id}}" method="POST">
+    <div>
+        <textarea class="textarea" type="text" name="post" value="{{blog.post}}">{{blog.post}}</textarea>
+    </div>
+    <input id="inputButton" class="button is-link" type="submit" value="Save">
+</form>

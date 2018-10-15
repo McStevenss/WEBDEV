@@ -1,0 +1,12 @@
+<h1 class="title">Answer a Question</h1>
+<p> Question number: {{faq.id}}</p>
+
+<form action="/answer-question/{{faq.id}}" method="POST">
+    <div>
+        Question: <input class="input" type="text" name="question" value="{{faq.question}}">
+    </div>
+    <div>
+        Answer: <input class="input" type="text" name="answer" value="{{faq.answer}}">
+    </div>
+    <input id="inputButton" class="button is-link" type="submit" value="Save">
+</form>
