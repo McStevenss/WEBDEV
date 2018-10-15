@@ -38,7 +38,7 @@ app.use(expressSession({
                 faqs: faqs,
                 isLoggedIn: isLoggedIn
             }
-            res.render("about.hbs", model)
+            res.render("About.hbs", model)
         })
     })
 
