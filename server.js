@@ -249,3 +249,7 @@ app.use(expressSession({
 app.use(express.static('public',{redirect:false}))
 
 app.listen(3000)
+
+app.use(function (req, res) {
+    res.render("notfound.hbs");
+});
