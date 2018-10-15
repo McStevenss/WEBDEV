@@ -212,7 +212,7 @@ app.use(expressSession({
             req.session.isLoggedIn = true
             res.redirect("/home")
         }else{
-            res.render("login.hbs")
+            res.render("Login.hbs")
         }
     })
 
