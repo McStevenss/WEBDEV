@@ -5,10 +5,12 @@ const bodyParser = require('body-parser')
 const expressSession = require('express-session')
 const db = require('./my-database')
 const bcrypt = require('bcrypt')
+var validator = require('validator')
+const isInt = require('validator/lib/isInt')
 
 
-let hash = bcrypt.hashSync('apa123', 10)
- 
+let hash = "$2b$10$cZ4fUT5bATfizDKq/xt8KuqbF1bRV2l6epI1icfrBRbyHh.miSxTO"
+
 
 app.engine('hbs', expressHandlebars({
 
@@ -81,13 +83,17 @@ app.use(expressSession({
     })
 
     app.get("/edit-post/:id", function(req,res){
-        
         if(req.session.isLoggedIn)
         {
             const id = req.params.id
+
+
             db.getPostById(id, function(error, blog){
                 const model = {
                     blog: blog
+                }
+                if(error || blog == null){
+                    return res.render('notfound.hbs')
                 }
                 res.render("edit-post.hbs", model)
                 res.status(200)
