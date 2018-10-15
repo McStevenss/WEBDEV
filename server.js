@@ -154,8 +154,8 @@ app.use(expressSession({
 
     app.post("/deleteEntry", function(req,res){
         if(req.session.isLoggedIn){
-
         const id = req.body.id
+        
         db.deleteEntryWithId(id,function(error){
             res.redirect("/guestbook")
         })

@@ -8,20 +8,24 @@
     <link rel="stylesheet" type="text/css" href="/bulma.min.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a class="button is-white is-medium is-fullwidth" href="/home">Home</a></li>
-            <li><a class="button is-white is-medium is-fullwidth" href="/about">About</a></li>
-            <li id="NoBorder"><a href="/home"><img src="/manslogo.png" alt="Logo"></a></li>
-            <li><a class="button is-white is-medium is-fullwidth" href="/blog">Blog</a></li>
-            <li><a class="button is-white is-medium is-fullwidth" href="/contact">Contact</a></li>
-            <li><a class="button is-white is-medium is-fullwidth" href="/guestbook">Guestbook</a></li>
+    <div>
+        <nav>
+            <ul>
+                <li class="reponsiveNAV"><a class="button is-white is-medium is-fullwidth" href="/home">Home</a></li>
+                <li class="reponsiveNAV"><a class="button is-white is-medium is-fullwidth" href="/about">About</a></li>
+                <li class="reponsiveNAV"id="NoBorder"><a href="/home"><img src="/manslogo.png" alt="Logo"></a></li>
+                <li class="reponsiveNAV"><a class="button is-white is-medium is-fullwidth" href="/blog">Blog</a></li>
+                <li class="reponsiveNAV"><a class="button is-white is-medium is-fullwidth" href="/contact">Contact</a></li>
+                <li class="reponsiveNAV"><a class="button is-white is-medium is-fullwidth" href="/guestbook">Guestbook</a></li>
 
-        </ul>
-    </nav>
-    <div id="spacer"></div>
+            </ul>
+        </nav>
+        <div id="spacer"></div>          
+    </div>
 <main>
+<div>
     {{{body}}}
+</div>
    <div id="spacer-small"></div>
     <footer>Copyrighted! <a href="login"><weak>Admin Login</weak></a>  </footer>
 </main>
