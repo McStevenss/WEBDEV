@@ -4,7 +4,11 @@ const app = express()
 const bodyParser = require('body-parser')
 const expressSession = require('express-session')
 const db = require('./my-database')
+const bcrypt = require('bcrypt')
 
+
+let hash = bcrypt.hashSync('apa123', 10)
+ 
 
 app.engine('hbs', expressHandlebars({
 
@@ -14,7 +18,7 @@ app.engine('hbs', expressHandlebars({
 
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(expressSession({
-    secret: 'keyboard cat',
+    secret: 'monkeyman',
     resave:false,
     saveUninitialized: true
 }))
@@ -207,10 +211,11 @@ app.use(expressSession({
         const username = req.body.username
         const password = req.body.password
 
-        if(username == "McStevens" && password == "apa123")
+        if(username == "McStevens" && bcrypt.compareSync(password,hash))
         {
             req.session.isLoggedIn = true
             res.redirect("/home")
+
         }else{
             res.render("Login.hbs")
         }
