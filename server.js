@@ -5,6 +5,8 @@ const bodyParser = require('body-parser')
 const expressSession = require('express-session')
 const db = require('./my-database')
 const bcrypt = require('bcrypt')
+const cookieParser = require('cookie-parser')
+const csurf = require('csurf')
 
 let hash = "$2b$10$cZ4fUT5bATfizDKq/xt8KuqbF1bRV2l6epI1icfrBRbyHh.miSxTO"
 
@@ -14,7 +16,7 @@ app.engine('hbs', expressHandlebars({
     defaultLayout: 'main',
     extname:'hbs'
 }))
-
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(expressSession({
     secret: 'monkeyman',
@@ -176,24 +178,20 @@ app.use(expressSession({
         res.render("Contact.hbs")
         res.status(200)
     })
-    app.get('/Login', function(req,res){
-        res.render("Login.hbs")
-        res.status(200)
-    })
-
+    
     app.get("/guestbook",function(req,res){
-         
+        
         const isLoggedIn = req.session.isLoggedIn
-
+        
         db.getAllEntries(function(error,guestbook){
-        const model = {
-            guestbook: guestbook,
-            isLoggedIn : isLoggedIn
-        }
+            const model = {
+                guestbook: guestbook,
+                isLoggedIn : isLoggedIn
+            }
             res.render("guestbook.hbs", model)
         })
     })
-
+    
     app.get("/add-entry", function(req,res){
         res.render("add-entry.hbs")
         res.status(200)    
@@ -201,26 +199,36 @@ app.use(expressSession({
     app.post("/add-entry",function(req,res){
         const entry = req.body.entry
         const name = req.body.name
-
+        
         db.createEntry(entry,name,function(error){
             res.redirect("/guestbook")
         })
     })
-
-
-
-    app.post("/login", function(req,res){
-
+    
+    
+    app.get('/Login', function(req,res){
+        const token = Date.now()
+        res.cookie("cookieToken", token)
+        const model = {
+            token : token
+        }
+        res.render("Login.hbs",model)
+        res.status(200)
+    })
+    
+    app.post("/Login", function(req,res){     
         const username = req.body.username
         const password = req.body.password
+        const token = req.body.token
+        const cookieToken = parseInt(req.cookies.cookieToken)
 
-        if(username == "McStevens" && bcrypt.compareSync(password,hash))
+        if(username == "McStevens" && bcrypt.compareSync(password,hash)&& token == cookieToken)
         {
             req.session.isLoggedIn = true
             res.redirect("/home")
 
         }else{
-            res.render("Login.hbs")
+            res.redirect("/Login")
         }
     })
 
