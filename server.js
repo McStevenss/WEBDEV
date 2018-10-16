@@ -6,7 +6,6 @@ const expressSession = require('express-session')
 const db = require('./my-database')
 const bcrypt = require('bcrypt')
 const cookieParser = require('cookie-parser')
-const csurf = require('csurf')
 
 let hash = "$2b$10$cZ4fUT5bATfizDKq/xt8KuqbF1bRV2l6epI1icfrBRbyHh.miSxTO"
 
@@ -193,16 +192,29 @@ app.use(expressSession({
     })
     
     app.get("/add-entry", function(req,res){
-        res.render("add-entry.hbs")
+        const token = Date.now()
+        res.cookie("guestbookToken", token)
+        const model = {
+            token : token
+        }
+        res.render("add-entry.hbs",model)
         res.status(200)    
     })
     app.post("/add-entry",function(req,res){
         const entry = req.body.entry
         const name = req.body.name
+        const token = req.body.token
+        const cookieToken = parseInt(req.cookies.guesbookToken)
         
-        db.createEntry(entry,name,function(error){
-            res.redirect("/guestbook")
-        })
+        if(token == cookieToken)
+        {
+            db.createEntry(entry,name,function(error){
+                res.redirect("/guestbook")
+            })
+        }
+        else{
+            res.redirect("/home")
+        }
     })
     
     
