@@ -1,0 +1,10 @@
+<h1 class="title">Edit an entry in the guestbook</h1>
+<p> Entry number: {{guestbook.id}}</p>
+
+<form action="/edit-guestbook/{{guestbook.id}}" method="POST">
+    <div>
+       
+        <textarea class="textarea" type="text" name="post" value="{{guestbook.entry}}">{{guestbook.entry}}</textarea>
+    </div>
+    <input id="inputButton" class="button is-link" type="submit" value="Save">
+</form>

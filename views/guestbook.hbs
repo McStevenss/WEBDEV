@@ -19,6 +19,7 @@
             {{#if ../isLoggedIn}}
             <form action="/deleteEntry" method="POST">
                 <input type="hidden" name="id" value="{{id}}">
+                <a class ="link-lookalike-blue" href="/edit-guestbook/{{id}}">Edit</a> 
                 <input class="link-lookalike" type="submit" value="Delete">
             </form>
             {{/if}}

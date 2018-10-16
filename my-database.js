@@ -34,12 +34,12 @@ exports.getAllEntries = function(callback){
         callback(error,guestbook)
     })
 }
-exports.getEntryById = function(callback){
+exports.getEntryById = function(id,callback){
     const query = `
         SELECT * FROM guestbook WHERE id =?
     `
-    db.all(query,function(error,guestbook){
-        callback(error,faqs)
+    db.get(query,[id],function(error,guestbook){
+        callback(error,guestbook)
     })
 }
 
@@ -58,6 +58,18 @@ exports.deleteEntryWithId = function(id,callback){
     `
     const values = [id]
     db.run(query,values,function(error){
+        callback(error)
+    })
+}
+
+exports.updateEntryWithId = function(entry,id,callback){
+    const query = `
+    UPDATE guestbook SET entry = ? WHERE id = ?
+    `
+    
+    const values = [entry,id]
+    
+    db.run(query,values, function(error){
         callback(error)
     })
 }

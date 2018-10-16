@@ -80,6 +80,41 @@ app.use(expressSession({
         }
     })
 
+    app.get("/edit-guestbook/:id", function(req,res){
+        if(req.session.isLoggedIn){
+            const id = req.params.id
+
+            db.getEntryById(id, function(error, guestbook){
+                const model = {
+                    guestbook : guestbook
+                }
+                if(error || guestbook == null){
+                    return res.render("notfound.hbs")
+                }
+                res.render("edit-guestbook.hbs", model)
+                res.status(200)
+            })
+        }
+        else{
+            res.redirect("/guestbook")
+        }
+    })
+
+    app.post("/edit-guestbook/:id", function(req,res){
+        if(req.session.isLoggedIn){
+            const id = req.params.id
+            const post = req.body.post
+
+            db.updateEntryWithId(post,id,function(error){
+                res.redirect("/guestbook")
+            })
+        }
+        else{
+            res.redirect("/guestbook")
+        }
+    })
+
+
     app.get("/edit-post/:id", function(req,res){
         if(req.session.isLoggedIn)
         {
@@ -91,7 +126,7 @@ app.use(expressSession({
                     blog: blog
                 }
                 if(error || blog == null){
-                    return res.render('notfound.hbs')
+                    return res.render("notfound.hbs")
                 }
                 res.render("edit-post.hbs", model)
                 res.status(200)
@@ -112,7 +147,7 @@ app.use(expressSession({
             })
         }
         else{
-            res.redirect("blog")
+            res.redirect("/blog")
         }
     })
 
@@ -204,7 +239,7 @@ app.use(expressSession({
         const entry = req.body.entry
         const name = req.body.name
         const token = req.body.token
-        const cookieToken = parseInt(req.cookies.guesbookToken)
+        const cookieToken = parseInt(req.cookies.guestbookToken)
         
         if(token == cookieToken)
         {
