@@ -23,14 +23,15 @@ app.use(expressSession({
     saveUninitialized: true
 }))
 
-    app.get('/'), function(req,res){
+    app.get('/', function(req,res){
         db.getLatestPost(function(error,blog){
             const model = {
                 blog: blog[0]
             }
             res.render("Home.hbs",model)
+            res.status(200)
         })
-    }
+    })
 
     app.get('/about',function(req,res){
         
@@ -306,4 +307,9 @@ app.use(expressSession({
 app.use(express.static('public',{redirect:false}))
 
 app.listen(3000)
+
+
+app.use(function (req, res) {
+    res.render("notfound.hbs");
+});
 
