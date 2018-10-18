@@ -23,6 +23,10 @@ app.use(expressSession({
     saveUninitialized: true
 }))
 
+    app.get('/'), function(req,res){
+        res.redirect("/home")
+    }
+
     app.get('/home', function(req,res){
 
         db.getLatestPost(function(error,blog){
