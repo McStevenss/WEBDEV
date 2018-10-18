@@ -24,14 +24,18 @@ app.use(expressSession({
 }))
 
     app.get('/'), function(req,res){
-        
+        res.redirect("/home")
+    }
+
+    app.get('/home', function(req,res){
+
         db.getLatestPost(function(error,blog){
             const model = {
                 blog: blog[0]
             }
             res.render("Home.hbs",model)
         })
-    }
+    })
 
     app.get('/about',function(req,res){
         
@@ -58,7 +62,7 @@ app.use(expressSession({
             })
         }
         else{
-            res.redirect("/")
+            res.redirect("/home")
         }   
     })
 
@@ -76,7 +80,7 @@ app.use(expressSession({
             })
         }
         else{
-            res.redirect("/")
+            res.redirect("/home")
         }
     })
 
@@ -173,7 +177,7 @@ app.use(expressSession({
             res.status(200)
         }
         else{
-            res.redirect("/")
+            res.redirect("/home")
         }
     })
     app.post("/add-post", function(req,res){
@@ -248,7 +252,7 @@ app.use(expressSession({
             })
         }
         else{
-            res.redirect("/")
+            res.redirect("/home")
         }
     })
     
@@ -272,7 +276,7 @@ app.use(expressSession({
         if(username == "McStevens" && bcrypt.compareSync(password,hash)&& token == cookieToken)
         {
             req.session.isLoggedIn = true
-            res.redirect("/")
+            res.redirect("/home")
 
         }else{
             res.redirect("/Login")
